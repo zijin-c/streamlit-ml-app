@@ -838,7 +838,7 @@ def main():
     # 页面选择
     page = st.sidebar.radio(
         "选择功能",
-        ["首页", "数据探索", "模型训练", "模型评估", "模型预测"]
+        ["首页", "数据探索", "模型评估", "模型预测"]
     )
     
     # 加载数据
@@ -862,7 +862,7 @@ def main():
         st.markdown("""
         <div style="text-align: center; padding: 2rem 0; margin-bottom: 3rem;">
             <p style="font-size: 1.2rem; color: #718096; margin-bottom: 1rem;">
-                专业的机器学习模型训练与可视化平台
+                专业的机器学习模型可视化与分析平台
             </p>
         </div>
         """, unsafe_allow_html=True)
@@ -893,33 +893,33 @@ def main():
         
         st.markdown("<br><br>", unsafe_allow_html=True)
         
-        # 系统介绍卡片 - 改进设计
-        st.markdown("### 系统介绍")
+        # 系统介绍卡片 - 面向用户的设计
+        st.markdown("### 系统功能")
         st.markdown("""
         <div class="info-card">
             <h4 style="color: #667eea; margin-top: 0; font-size: 1.5rem; margin-bottom: 1.5rem;">
-                强大的机器学习模型训练与可视化系统
+                专业的机器学习模型可视化与分析平台
             </h4>
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
-                <div style="padding: 1rem; background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); border-radius: 10px; border-left: 4px solid #667eea;">
-                    <h5 style="color: #667eea; margin: 0 0 0.5rem 0; font-weight: 600;">三种模型</h5>
-                    <p style="margin: 0; color: #4a5568;">XGBoost, LSTM, Transformer</p>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+                <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); border-radius: 12px; border-left: 4px solid #667eea; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+                    <h5 style="color: #667eea; margin: 0 0 0.75rem 0; font-weight: 700; font-size: 1.1rem;">多模型支持</h5>
+                    <p style="margin: 0; color: #4a5568; line-height: 1.6;">支持 XGBoost、LSTM、Transformer 三种先进的机器学习模型，可灵活切换查看不同模型的性能表现</p>
                 </div>
-                <div style="padding: 1rem; background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); border-radius: 10px; border-left: 4px solid #764ba2;">
-                    <h5 style="color: #764ba2; margin: 0 0 0.5rem 0; font-weight: 600;">自动优化</h5>
-                    <p style="margin: 0; color: #4a5568;">贝叶斯超参数优化</p>
+                <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(118, 75, 162, 0.1) 0%, rgba(240, 147, 251, 0.1) 100%); border-radius: 12px; border-left: 4px solid #764ba2; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+                    <h5 style="color: #764ba2; margin: 0 0 0.75rem 0; font-weight: 700; font-size: 1.1rem;">性能评估</h5>
+                    <p style="margin: 0; color: #4a5568; line-height: 1.6;">提供全面的模型性能指标评估，包括 RMSE、R²、MAE、MBE、MAPE、MSE 等多项指标</p>
                 </div>
-                <div style="padding: 1rem; background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); border-radius: 10px; border-left: 4px solid #f093fb;">
-                    <h5 style="color: #f093fb; margin: 0 0 0.5rem 0; font-weight: 600;">多输出回归</h5>
-                    <p style="margin: 0; color: #4a5568;">同时预测5个输出维度</p>
+                <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(240, 147, 251, 0.1) 0%, rgba(245, 87, 108, 0.1) 100%); border-radius: 12px; border-left: 4px solid #f093fb; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+                    <h5 style="color: #f093fb; margin: 0 0 0.75rem 0; font-weight: 700; font-size: 1.1rem;">多维度预测</h5>
+                    <p style="margin: 0; color: #4a5568; line-height: 1.6;">支持同时预测5个输出维度，适用于复杂的多目标回归任务</p>
                 </div>
-                <div style="padding: 1rem; background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); border-radius: 10px; border-left: 4px solid #4facfe;">
-                    <h5 style="color: #4facfe; margin: 0 0 0.5rem 0; font-weight: 600;">可视化分析</h5>
-                    <p style="margin: 0; color: #4a5568;">交互式图表展示</p>
+                <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(79, 172, 254, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%); border-radius: 12px; border-left: 4px solid #4facfe; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+                    <h5 style="color: #4facfe; margin: 0 0 0.75rem 0; font-weight: 700; font-size: 1.1rem;">交互式可视化</h5>
+                    <p style="margin: 0; color: #4a5568; line-height: 1.6;">提供丰富的交互式图表，包括预测对比、散点图分析、误差分布等可视化功能</p>
                 </div>
-                <div style="padding: 1rem; background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); border-radius: 10px; border-left: 4px solid #f5576c;">
-                    <h5 style="color: #f5576c; margin: 0 0 0.5rem 0; font-weight: 600;">评估指标</h5>
-                    <p style="margin: 0; color: #4a5568;">RMSE, R², MAE, MBE, MAPE, MSE</p>
+                <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(245, 87, 108, 0.1) 0%, rgba(240, 147, 251, 0.1) 100%); border-radius: 12px; border-left: 4px solid #f5576c; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+                    <h5 style="color: #f5576c; margin: 0 0 0.75rem 0; font-weight: 700; font-size: 1.1rem;">实时预测</h5>
+                    <p style="margin: 0; color: #4a5568; line-height: 1.6;">支持实时输入特征值进行预测，快速获得模型预测结果</p>
                 </div>
             </div>
         </div>
@@ -933,80 +933,22 @@ def main():
         
         features = [
             ("数据探索", "查看数据的基本信息、统计特征和分布情况", "linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%)", "#667eea"),
-            ("模型训练", "选择模型类型并训练（需要在命令行运行训练脚本）", "linear-gradient(135deg, rgba(240, 147, 251, 0.1) 0%, rgba(245, 87, 108, 0.1) 100%)", "#f093fb"),
-            ("模型评估", "查看训练好的模型性能指标和可视化结果", "linear-gradient(135deg, rgba(79, 172, 254, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%)", "#4facfe"),
+            ("模型评估", "查看模型性能指标和可视化分析结果", "linear-gradient(135deg, rgba(79, 172, 254, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%)", "#4facfe"),
             ("模型预测", "使用训练好的模型进行实时预测", "linear-gradient(135deg, rgba(245, 87, 108, 0.1) 0%, rgba(240, 147, 251, 0.1) 100%)", "#f5576c")
         ]
         
-        with col1:
-            for title, desc, bg, border_color in features[:2]:
-                st.markdown(f"""
-                <div class="info-card" style="background: {bg}; border-left-color: {border_color};">
-                    <h4 style="color: {border_color}; margin-top: 0; font-size: 1.3rem; margin-bottom: 0.75rem; font-weight: 600;">
-                        {title}
-                    </h4>
-                    <p style="margin: 0; color: #4a5568; line-height: 1.6;">{desc}</p>
-                </div>
-                """, unsafe_allow_html=True)
-        
-        with col2:
-            for title, desc, bg, border_color in features[2:]:
-                st.markdown(f"""
-                <div class="info-card" style="background: {bg}; border-left-color: {border_color};">
-                    <h4 style="color: {border_color}; margin-top: 0; font-size: 1.3rem; margin-bottom: 0.75rem; font-weight: 600;">
-                        {title}
-                    </h4>
-                    <p style="margin: 0; color: #4a5568; line-height: 1.6;">{desc}</p>
-                </div>
-                """, unsafe_allow_html=True)
-        
-        st.markdown("<br>", unsafe_allow_html=True)
-        
-        # 训练模型 - 改进代码块展示
-        st.markdown("### 训练模型")
-        st.markdown("""
-        <div class="info-card">
-            <h4 style="color: #667eea; margin-top: 0; margin-bottom: 1rem; font-weight: 600;">
-                在命令行中运行以下命令来训练模型
-            </h4>
-            <p style="color: #718096; margin-bottom: 1.5rem;">
-                选择您想要训练的模型类型，然后执行相应的命令：
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        # 使用列布局展示命令
-        col1, col2, col3 = st.columns(3)
-        
-        commands = [
-            ("XGBoost", "python train_xgboost.py", "#667eea"),
-            ("LSTM", "python train_lstm.py", "#f093fb"),
-            ("Transformer", "python train_transformer.py", "#4facfe")
-        ]
-        
-        for col, (model_name, cmd, color) in zip([col1, col2, col3], commands):
+        cols = st.columns(3)
+        for col, (title, desc, bg, border_color) in zip(cols, features):
             with col:
                 st.markdown(f"""
-                <div style="background: rgba(255, 255, 255, 0.95); padding: 1.5rem; border-radius: 12px; 
-                            border: 2px solid {color}; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); margin-bottom: 1rem;">
-                    <h5 style="color: {color}; margin: 0 0 1rem 0; font-size: 1.1rem; font-weight: 600;">{model_name}</h5>
-                    <code style="background: #f7fafc; padding: 0.5rem 1rem; border-radius: 6px; 
-                                display: block; color: #2d3748; font-family: 'Courier New', monospace;">
-                        {cmd}
-                    </code>
+                <div class="info-card" style="background: {bg}; border-left-color: {border_color};">
+                    <h4 style="color: {border_color}; margin-top: 0; font-size: 1.3rem; margin-bottom: 0.75rem; font-weight: 600;">
+                        {title}
+                    </h4>
+                    <p style="margin: 0; color: #4a5568; line-height: 1.6;">{desc}</p>
                 </div>
                 """, unsafe_allow_html=True)
         
-        # 添加提示信息
-        st.markdown("""
-        <div class="info-card" style="background: linear-gradient(135deg, rgba(132, 250, 176, 0.1) 0%, rgba(143, 211, 244, 0.1) 100%); 
-                    border-left-color: #10b981; margin-top: 2rem;">
-            <p style="margin: 0; color: #065f46;">
-                <strong>提示：</strong>训练完成后，模型将保存在 <code style="background: rgba(16, 185, 129, 0.1); 
-                padding: 0.2rem 0.5rem; border-radius: 4px;">models/</code> 目录下，可以在「模型评估」页面查看结果
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
     
     # =============== 数据探索 ===============
     elif page == "数据探索":
@@ -1133,96 +1075,6 @@ def main():
                     use_container_width=True
                 )
     
-    # =============== 模型训练 ===============
-    elif page == "模型训练":
-        st.markdown('<p class="medium-font">模型训练</p>', unsafe_allow_html=True)
-        st.markdown("---")
-        
-        st.markdown("""
-        <div class="info-card">
-            <p style="margin: 0;"><strong>提示：</strong>由于训练过程可能需要较长时间，请在命令行中运行训练脚本</p>
-        </div>
-        """, unsafe_allow_html=True)
-        
-        st.markdown("<br>", unsafe_allow_html=True)
-        model_choice = st.selectbox("选择模型", ["XGBoost", "LSTM", "Transformer"])
-        
-        st.markdown(f"### {model_choice} 模型训练")
-        
-        if model_choice == "XGBoost":
-            col1, col2 = st.columns([2, 1])
-            with col1:
-                st.markdown("""
-                <div class="info-card">
-                    <h4 style="color: #667eea; margin-top: 0;">XGBoost模型特点</h4>
-                    <ul>
-                        <li>基于梯度提升树</li>
-                        <li>适合处理表格数据</li>
-                        <li>训练速度快</li>
-                        <li>可解释性强</li>
-                    </ul>
-                    <h4 style="color: #667eea;">超参数</h4>
-                    <ul>
-                        <li><strong>n_estimators</strong>: 树的数量 (10-5000)</li>
-                        <li><strong>max_depth</strong>: 树的最大深度 (10-20)</li>
-                        <li><strong>learning_rate</strong>: 学习率 (0.0001-1)</li>
-                    </ul>
-                </div>
-                """, unsafe_allow_html=True)
-            with col2:
-                st.code("python train_xgboost.py", language="bash")
-            
-        elif model_choice == "LSTM":
-            col1, col2 = st.columns([2, 1])
-            with col1:
-                st.markdown("""
-                <div class="info-card">
-                    <h4 style="color: #667eea; margin-top: 0;">LSTM模型特点</h4>
-                    <ul>
-                        <li>长短期记忆网络</li>
-                        <li>适合处理序列数据</li>
-                        <li>能捕捉时间依赖关系</li>
-                    </ul>
-                    <h4 style="color: #667eea;">超参数</h4>
-                    <ul>
-                        <li><strong>hidden_size</strong>: 隐藏层单元数 (20-50)</li>
-                        <li><strong>learning_rate</strong>: 学习率 (1e-3 - 1e-2)</li>
-                        <li><strong>l2_regularization</strong>: L2正则化 (1e-4 - 1e-3)</li>
-                    </ul>
-                </div>
-                """, unsafe_allow_html=True)
-            with col2:
-                st.code("python train_lstm.py", language="bash")
-            
-        elif model_choice == "Transformer":
-            col1, col2 = st.columns([2, 1])
-            with col1:
-                st.markdown("""
-                <div class="info-card">
-                    <h4 style="color: #667eea; margin-top: 0;">Transformer模型特点</h4>
-                    <ul>
-                        <li>自注意力机制</li>
-                        <li>能并行处理序列</li>
-                        <li>捕捉长距离依赖</li>
-                    </ul>
-                    <h4 style="color: #667eea;">超参数</h4>
-                    <ul>
-                        <li><strong>nhead</strong>: 注意力头数 (2-8)</li>
-                        <li><strong>learning_rate</strong>: 学习率 (1e-4 - 1e-1)</li>
-                        <li><strong>l2_regularization</strong>: L2正则化 (1e-6 - 1e-2)</li>
-                        <li><strong>batch_size</strong>: 批大小 (16-128)</li>
-                    </ul>
-                </div>
-                """, unsafe_allow_html=True)
-            with col2:
-                st.code("python train_transformer.py", language="bash")
-        
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown("""
-        <div class="info-card">
-            <p style="margin: 0;"><strong>提示：</strong>训练完成后，模型将保存在 <code>models/</code> 目录下，可以在「模型评估」页面查看结果</p>
-        </div>
-        """, unsafe_allow_html=True)
     
     # =============== 模型评估 ===============
     elif page == "模型评估":
@@ -1236,21 +1088,15 @@ def main():
         
         if model is None:
             st.markdown(f"""
-            <div class="info-card">
-                <p style="margin: 0;"><strong>警告：</strong>{model_choice} 模型尚未训练，请先运行训练脚本</p>
+            <div class="info-card" style="background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 152, 0, 0.1) 100%); 
+                        border-left-color: #ff9800;">
+                <p style="margin: 0; color: #e65100;"><strong>提示：</strong>{model_choice} 模型尚未加载，请检查模型文件是否存在</p>
             </div>
             """, unsafe_allow_html=True)
-            st.code(f"python train_{model_choice.lower()}.py", language="bash")
             return
         
-        st.markdown(f"""
-        <div class="info-card" style="background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); color: white;">
-            <p style="margin: 0; font-size: 1.1em;"><strong>{model_choice} 模型加载成功</strong></p>
-        </div>
-        """, unsafe_allow_html=True)
-        
         # 进行预测
-        with st.spinner('正在进行预测...'):
+        with st.spinner('正在计算模型性能指标...'):
             y_train_pred_norm = model.predict(data_dict['X_train_norm'])
             y_test_pred_norm = model.predict(data_dict['X_test_norm'])
             
@@ -1261,55 +1107,111 @@ def main():
         train_metrics = calculate_metrics_multioutput(data_dict['y_train'], y_train_pred)
         test_metrics = calculate_metrics_multioutput(data_dict['y_test'], y_test_pred)
         
-        # 显示整体指标
+        # 模型信息卡片
+        st.markdown(f"""
+        <div class="info-card" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); 
+                    border-left-color: #667eea; margin-bottom: 2rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h3 style="color: #667eea; margin: 0 0 0.5rem 0; font-weight: 700;">{model_choice} 模型</h3>
+                    <p style="margin: 0; color: #4a5568; font-size: 0.95rem;">模型评估完成，性能指标已计算</p>
+                </div>
+                <div style="font-size: 2rem; color: #667eea;">●</div>
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+        
+        # 显示整体指标 - 使用高级卡片设计
         st.markdown("<br>", unsafe_allow_html=True)
         st.markdown("### 整体性能指标")
         
-        col1, col2 = st.columns(2)
+        # 训练集指标卡片
+        st.markdown("#### 训练集性能")
+        train_cols = st.columns(6)
+        train_metric_values = [
+            ('RMSE', train_metrics['average']['RMSE'], '#667eea'),
+            ('R²', train_metrics['average']['R2'], '#764ba2'),
+            ('MAE', train_metrics['average']['MAE'], '#f093fb'),
+            ('MBE', train_metrics['average']['MBE'], '#f5576c'),
+            ('MAPE', train_metrics['average']['MAPE'], '#4facfe'),
+            ('MSE', train_metrics['average']['MSE'], '#00f2fe')
+        ]
         
-        with col1:
-            st.markdown("#### 训练集")
-            metrics_df_train = pd.DataFrame({
-                '指标': ['RMSE', 'R²', 'MAE', 'MBE', 'MAPE', 'MSE'],
-                '值': [
-                    f"{train_metrics['average']['RMSE']:.6f}",
-                    f"{train_metrics['average']['R2']:.6f}",
-                    f"{train_metrics['average']['MAE']:.6f}",
-                    f"{train_metrics['average']['MBE']:.6f}",
-                    f"{train_metrics['average']['MAPE']:.2f}%",
-                    f"{train_metrics['average']['MSE']:.6f}"
-                ]
-            })
-            st.dataframe(
-                metrics_df_train.style.background_gradient(cmap='Blues', axis=0, subset=['值']),
-                hide_index=True,
-                use_container_width=True
-            )
+        for idx, (name, value, color) in enumerate(train_metric_values):
+            with train_cols[idx]:
+                if name == 'R²':
+                    display_value = f"{value:.4f}"
+                    better = value > 0.9
+                elif name == 'MAPE':
+                    display_value = f"{value:.2f}%"
+                    better = value < 10
+                else:
+                    display_value = f"{value:.6f}"
+                    better = value < 1.0 if name in ['RMSE', 'MAE', 'MBE'] else True
+                
+                st.markdown(f"""
+                <div style="background: linear-gradient(135deg, {color}15 0%, {color}05 100%); 
+                            padding: 1.5rem 1rem; border-radius: 12px; border: 2px solid {color}40; 
+                            text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
+                            transition: all 0.3s ease; margin-bottom: 1rem;">
+                    <div style="color: {color}; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; 
+                                text-transform: uppercase; letter-spacing: 0.5px;">{name}</div>
+                    <div style="color: #1a202c; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem;">
+                        {display_value}
+                    </div>
+                    <div style="color: {'#10b981' if better else '#ef4444'}; font-size: 0.75rem; font-weight: 500;">
+                        {'良好' if better else '需改进'}
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
         
-        with col2:
-            st.markdown("#### 测试集")
-            metrics_df_test = pd.DataFrame({
-                '指标': ['RMSE', 'R²', 'MAE', 'MBE', 'MAPE', 'MSE'],
-                '值': [
-                    f"{test_metrics['average']['RMSE']:.6f}",
-                    f"{test_metrics['average']['R2']:.6f}",
-                    f"{test_metrics['average']['MAE']:.6f}",
-                    f"{test_metrics['average']['MBE']:.6f}",
-                    f"{test_metrics['average']['MAPE']:.2f}%",
-                    f"{test_metrics['average']['MSE']:.6f}"
-                ]
-            })
-            st.dataframe(
-                metrics_df_test.style.background_gradient(cmap='Reds', axis=0, subset=['值']),
-                hide_index=True,
-                use_container_width=True
-            )
+        st.markdown("<br>", unsafe_allow_html=True)
+        
+        # 测试集指标卡片
+        st.markdown("#### 测试集性能")
+        test_cols = st.columns(6)
+        test_metric_values = [
+            ('RMSE', test_metrics['average']['RMSE'], '#667eea'),
+            ('R²', test_metrics['average']['R2'], '#764ba2'),
+            ('MAE', test_metrics['average']['MAE'], '#f093fb'),
+            ('MBE', test_metrics['average']['MBE'], '#f5576c'),
+            ('MAPE', test_metrics['average']['MAPE'], '#4facfe'),
+            ('MSE', test_metrics['average']['MSE'], '#00f2fe')
+        ]
+        
+        for idx, (name, value, color) in enumerate(test_metric_values):
+            with test_cols[idx]:
+                if name == 'R²':
+                    display_value = f"{value:.4f}"
+                    better = value > 0.9
+                elif name == 'MAPE':
+                    display_value = f"{value:.2f}%"
+                    better = value < 10
+                else:
+                    display_value = f"{value:.6f}"
+                    better = value < 1.0 if name in ['RMSE', 'MAE', 'MBE'] else True
+                
+                st.markdown(f"""
+                <div style="background: linear-gradient(135deg, {color}15 0%, {color}05 100%); 
+                            padding: 1.5rem 1rem; border-radius: 12px; border: 2px solid {color}40; 
+                            text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.08); 
+                            transition: all 0.3s ease; margin-bottom: 1rem;">
+                    <div style="color: {color}; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; 
+                                text-transform: uppercase; letter-spacing: 0.5px;">{name}</div>
+                    <div style="color: #1a202c; font-size: 1.5rem; font-weight: 700; margin-bottom: 0.25rem;">
+                        {display_value}
+                    </div>
+                    <div style="color: {'#10b981' if better else '#ef4444'}; font-size: 0.75rem; font-weight: 500;">
+                        {'良好' if better else '需改进'}
+                    </div>
+                </div>
+                """, unsafe_allow_html=True)
         
         # 各输出维度指标对比
         st.markdown("<br>", unsafe_allow_html=True)
         st.markdown("### 各输出维度指标对比")
         
-        dataset_choice = st.radio("选择数据集", ["训练集", "测试集"], horizontal=True)
+        dataset_choice = st.radio("选择数据集", ["训练集", "测试集"], horizontal=True, key="dataset_choice")
         metrics_to_show = train_metrics if dataset_choice == "训练集" else test_metrics
         
         fig = plot_metrics_comparison(metrics_to_show)
@@ -1317,13 +1219,14 @@ def main():
         
         # 详细评估
         st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown("### 详细评估")
+        st.markdown("### 详细分析")
         
-        output_idx = st.selectbox("选择输出维度", range(5), format_func=lambda x: f"输出 {x+1}")
+        output_idx = st.selectbox("选择输出维度", range(5), format_func=lambda x: f"输出 {x+1}", key="output_dim")
         
-        tab1, tab2, tab3 = st.tabs(["预测对比", "散点图", "误差分析"])
+        tab1, tab2, tab3 = st.tabs(["预测对比", "散点图分析", "误差分布"])
         
         with tab1:
+            st.markdown("#### 预测值 vs 真实值对比")
             col1, col2 = st.columns(2)
             
             with col1:
@@ -1339,6 +1242,7 @@ def main():
                 st.plotly_chart(fig, use_container_width=True)
         
         with tab2:
+            st.markdown("#### 散点图分析")
             col1, col2 = st.columns(2)
             
             with col1:
@@ -1356,6 +1260,7 @@ def main():
                 st.plotly_chart(fig, use_container_width=True)
         
         with tab3:
+            st.markdown("#### 误差分布分析")
             col1, col2 = st.columns(2)
             
             with col1:
@@ -1368,7 +1273,7 @@ def main():
         
         # 下载预测结果
         st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown("### 下载预测结果")
+        st.markdown("### 导出结果")
         
         col1, col2 = st.columns(2)
         
@@ -1406,28 +1311,37 @@ def main():
         
         if model is None:
             st.markdown(f"""
-            <div class="info-card">
-                <p style="margin: 0;"><strong>警告：</strong>{model_choice} 模型尚未训练，请先运行训练脚本</p>
+            <div class="info-card" style="background: linear-gradient(135deg, rgba(255, 193, 7, 0.1) 0%, rgba(255, 152, 0, 0.1) 100%); 
+                        border-left-color: #ff9800;">
+                <p style="margin: 0; color: #e65100;"><strong>提示：</strong>{model_choice} 模型尚未加载，请检查模型文件是否存在</p>
             </div>
             """, unsafe_allow_html=True)
             return
         
+        # 模型信息卡片
         st.markdown(f"""
-        <div class="info-card" style="background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); color: white;">
-            <p style="margin: 0; font-size: 1.1em;"><strong>{model_choice} 模型加载成功</strong></p>
+        <div class="info-card" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); 
+                    border-left-color: #667eea; margin-bottom: 2rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                    <h3 style="color: #667eea; margin: 0 0 0.5rem 0; font-weight: 700;">{model_choice} 模型</h3>
+                    <p style="margin: 0; color: #4a5568; font-size: 0.95rem;">模型已就绪，可以进行预测</p>
+                </div>
+                <div style="font-size: 2rem; color: #667eea;">●</div>
+            </div>
         </div>
         """, unsafe_allow_html=True)
         
         st.markdown("<br>", unsafe_allow_html=True)
-        st.markdown("### 输入特征")
+        st.markdown("### 特征输入")
         
         # 方式1: 手动输入
-        st.markdown("#### 方式1: 手动输入特征值")
+        st.markdown("#### 自定义输入")
         st.markdown("""
-        <div class="info-card">
-            <p style="margin: 0;">请在下方输入框中填入特征值，然后点击"开始预测"按钮</p>
+        <div class="info-card" style="margin-bottom: 1.5rem;">
+            <p style="margin: 0; color: #4a5568;">在下方输入框中填入特征值，系统将使用 {model_choice} 模型进行预测</p>
         </div>
-        """, unsafe_allow_html=True)
+        """.format(model_choice=model_choice), unsafe_allow_html=True)
         
         n_features = data_dict['n_features']
         
@@ -1448,49 +1362,58 @@ def main():
                         )
                         input_features.append(val)
         
-        if st.button("开始预测", type="primary"):
+        if st.button("开始预测", type="primary", use_container_width=True):
             # 归一化输入
             X_input = np.array(input_features).reshape(1, -1)
             X_input_norm = processor.input_scaler.transform(X_input)
             
             # 预测
-            with st.spinner('正在预测...'):
+            with st.spinner('正在计算预测结果...'):
                 y_pred_norm = model.predict(X_input_norm)
                 y_pred = processor.inverse_transform_output(y_pred_norm)
             
             # 显示结果
             st.markdown("""
-            <div class="info-card" style="background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); color: white;">
-                <p style="margin: 0; font-size: 1.1em;"><strong>预测完成</strong></p>
+            <div class="info-card" style="background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(5, 150, 105, 0.1) 100%); 
+                        border-left-color: #10b981; margin-top: 2rem;">
+                <p style="margin: 0; color: #065f46; font-size: 1.1em;"><strong>预测完成</strong></p>
             </div>
             """, unsafe_allow_html=True)
             
             st.markdown("<br>", unsafe_allow_html=True)
             st.markdown("### 预测结果")
             
-            result_df = pd.DataFrame({
-                '输出维度': [f'输出 {i+1}' for i in range(5)],
-                '预测值': y_pred.flatten()
-            })
+            # 使用卡片展示预测结果
+            result_cols = st.columns(5)
+            colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4facfe']
             
-            st.dataframe(
-                result_df.style.background_gradient(cmap='viridis', axis=0, subset=['预测值']),
-                hide_index=True,
-                use_container_width=True
-            )
+            for idx, (col, color, value) in enumerate(zip(result_cols, colors, y_pred.flatten())):
+                with col:
+                    st.markdown(f"""
+                    <div style="background: linear-gradient(135deg, {color}15 0%, {color}05 100%); 
+                                padding: 1.5rem 1rem; border-radius: 12px; border: 2px solid {color}40; 
+                                text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 1rem;">
+                        <div style="color: {color}; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; 
+                                    text-transform: uppercase; letter-spacing: 0.5px;">输出 {idx+1}</div>
+                        <div style="color: #1a202c; font-size: 1.8rem; font-weight: 700;">
+                            {value:.4f}
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
             
             # 可视化
-            colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4facfe']
+            st.markdown("<br>", unsafe_allow_html=True)
             fig = go.Figure(data=[
                 go.Bar(
-                    x=result_df['输出维度'], 
-                    y=result_df['预测值'], 
+                    x=[f'输出 {i+1}' for i in range(5)], 
+                    y=y_pred.flatten(), 
                     marker_color=colors,
                     marker_line_color='white',
                     marker_line_width=2,
-                    text=result_df['预测值'],
+                    text=y_pred.flatten(),
                     texttemplate='%{text:.4f}',
-                    textposition='outside'
+                    textposition='outside',
+                    hovertemplate='<b>%{x}</b><br>预测值: %{y:.4f}<extra></extra>'
                 )
             ])
             fig.update_layout(
@@ -1500,81 +1423,103 @@ def main():
                 height=450,
                 template='plotly_white',
                 plot_bgcolor='rgba(0,0,0,0)',
-                paper_bgcolor='rgba(0,0,0,0)'
+                paper_bgcolor='rgba(0,0,0,0)',
+                showlegend=False
             )
             st.plotly_chart(fig, use_container_width=True)
         
         # 方式2: 使用测试集样本
         st.markdown("<br>", unsafe_allow_html=True)
         st.markdown("---")
-        st.markdown("#### 方式2: 从测试集选择样本")
+        st.markdown("#### 测试样本预测")
         st.markdown("""
-        <div class="info-card">
-            <p style="margin: 0;">从测试集中选择一个样本进行预测，并对比真实值与预测值</p>
+        <div class="info-card" style="margin-bottom: 1.5rem;">
+            <p style="margin: 0; color: #4a5568;">从测试集中选择一个样本进行预测，系统将显示预测值与真实值的对比分析</p>
         </div>
         """, unsafe_allow_html=True)
         
         sample_idx = st.selectbox(
             "选择测试集样本",
             range(data_dict['n_test']),
-            format_func=lambda x: f"样本 {x+1}"
+            format_func=lambda x: f"样本 {x+1}",
+            key="sample_select"
         )
         
-        if st.button("预测选定样本"):
+        if st.button("预测选定样本", use_container_width=True):
             X_sample = data_dict['X_test_norm'][sample_idx:sample_idx+1]
             y_true_sample = data_dict['y_test'][sample_idx]
             
             # 预测
-            with st.spinner('正在预测...'):
+            with st.spinner('正在计算预测结果...'):
                 y_pred_norm = model.predict(X_sample)
                 y_pred_sample = processor.inverse_transform_output(y_pred_norm).flatten()
             
             # 对比结果
             st.markdown("<br>", unsafe_allow_html=True)
-            st.markdown("### 预测对比")
+            st.markdown("### 预测结果对比")
             
-            comparison_df = pd.DataFrame({
-                '输出维度': [f'输出 {i+1}' for i in range(5)],
-                '真实值': y_true_sample,
-                '预测值': y_pred_sample,
-                '误差': y_true_sample - y_pred_sample,
-                '相对误差(%)': np.abs((y_true_sample - y_pred_sample) / y_true_sample * 100)
-            })
+            # 使用卡片展示对比结果
+            comparison_cols = st.columns(5)
             
-            st.dataframe(
-                comparison_df.style.background_gradient(cmap='RdYlGn', axis=0, subset=['误差', '相对误差(%)']),
-                hide_index=True,
-                use_container_width=True
-            )
+            for idx, (col, color) in enumerate(zip(comparison_cols, colors)):
+                with col:
+                    true_val = y_true_sample[idx]
+                    pred_val = y_pred_sample[idx]
+                    error = abs(true_val - pred_val)
+                    error_pct = (error / abs(true_val) * 100) if true_val != 0 else 0
+                    
+                    st.markdown(f"""
+                    <div style="background: linear-gradient(135deg, {color}15 0%, {color}05 100%); 
+                                padding: 1.5rem 1rem; border-radius: 12px; border: 2px solid {color}40; 
+                                text-align: center; box-shadow: 0 4px 12px rgba(0,0,0,0.08); margin-bottom: 1rem;">
+                        <div style="color: {color}; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.75rem; 
+                                    text-transform: uppercase; letter-spacing: 0.5px;">输出 {idx+1}</div>
+                        <div style="margin-bottom: 0.5rem;">
+                            <div style="color: #718096; font-size: 0.75rem; margin-bottom: 0.25rem;">真实值</div>
+                            <div style="color: #1a202c; font-size: 1.2rem; font-weight: 700;">{true_val:.4f}</div>
+                        </div>
+                        <div style="margin-bottom: 0.5rem; padding-top: 0.5rem; border-top: 1px solid {color}30;">
+                            <div style="color: #718096; font-size: 0.75rem; margin-bottom: 0.25rem;">预测值</div>
+                            <div style="color: #1a202c; font-size: 1.2rem; font-weight: 700;">{pred_val:.4f}</div>
+                        </div>
+                        <div style="padding-top: 0.5rem; border-top: 1px solid {color}30;">
+                            <div style="color: {'#10b981' if error_pct < 5 else '#ef4444'}; font-size: 0.7rem; font-weight: 600;">
+                                误差: {error_pct:.2f}%
+                            </div>
+                        </div>
+                    </div>
+                    """, unsafe_allow_html=True)
             
             # 可视化对比
-            colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4facfe']
+            st.markdown("<br>", unsafe_allow_html=True)
             fig = go.Figure()
             fig.add_trace(go.Bar(
                 name='真实值',
-                x=comparison_df['输出维度'],
-                y=comparison_df['真实值'],
+                x=[f'输出 {i+1}' for i in range(5)],
+                y=y_true_sample,
                 marker_color='#e74c3c',
                 marker_line_color='white',
                 marker_line_width=2,
-                text=comparison_df['真实值'],
+                text=y_true_sample,
                 texttemplate='%{text:.4f}',
-                textposition='outside'
+                textposition='outside',
+                hovertemplate='<b>真实值</b><br>%{x}<br>值: %{y:.4f}<extra></extra>'
             ))
             fig.add_trace(go.Bar(
                 name='预测值',
-                x=comparison_df['输出维度'],
-                y=comparison_df['预测值'],
+                x=[f'输出 {i+1}' for i in range(5)],
+                y=y_pred_sample,
                 marker_color=colors,
                 marker_line_color='white',
                 marker_line_width=2,
-                text=comparison_df['预测值'],
+                text=y_pred_sample,
                 texttemplate='%{text:.4f}',
-                textposition='outside'
+                textposition='outside',
+                hovertemplate='<b>预测值</b><br>%{x}<br>值: %{y:.4f}<extra></extra>'
             ))
             
             fig.update_layout(
-                title=dict(text='真实值 vs 预测值', font=dict(size=18, color='#2d3748')),
+                title=dict(text='真实值 vs 预测值对比', font=dict(size=18, color='#2d3748')),
                 xaxis_title=dict(text='输出维度', font=dict(size=14, color='#4a5568')),
                 yaxis_title=dict(text='值', font=dict(size=14, color='#4a5568')),
                 barmode='group',
