@@ -58,6 +58,18 @@ st.markdown("""
     header {visibility: hidden;}
     .stDeployButton {display: none;}
     
+    /* 隐藏侧边栏 */
+    [data-testid="stSidebar"] {
+        display: none !important;
+    }
+    
+    /* 调整主内容区域宽度 */
+    .main .block-container {
+        max-width: 100% !important;
+        padding-left: 2rem !important;
+        padding-right: 2rem !important;
+    }
+    
     /* 标题样式 - 更现代的渐变效果 */
     .big-font {
         font-size: 3.5rem !important;
@@ -828,18 +840,9 @@ def plot_metrics_comparison(metrics_dict):
 
 
 def main():
-    # 标题
-    st.markdown('<p class="big-font">机器学习模型可视化系统</p>', unsafe_allow_html=True)
-    st.markdown("---")
-    
-    # 侧边栏
-    st.sidebar.markdown('<p class="medium-font">控制面板</p>', unsafe_allow_html=True)
-    
-    # 页面选择
-    page = st.sidebar.radio(
-        "选择功能",
-        ["首页", "数据探索", "模型评估", "模型预测"]
-    )
+    # 初始化页面状态
+    if 'current_page' not in st.session_state:
+        st.session_state.current_page = "首页"
     
     # 加载数据
     if 'processor' not in st.session_state or 'data_dict' not in st.session_state:
@@ -857,7 +860,11 @@ def main():
         return
     
     # =============== 首页 ===============
-    if page == "首页":
+    if st.session_state.current_page == "首页":
+        # 标题
+        st.markdown('<p class="big-font">机器学习模型可视化系统</p>', unsafe_allow_html=True)
+        st.markdown("---")
+        
         # 欢迎横幅
         st.markdown("""
         <div style="text-align: center; padding: 2rem 0; margin-bottom: 3rem;">
@@ -867,33 +874,75 @@ def main():
         </div>
         """, unsafe_allow_html=True)
         
-        # 统计数据卡片 - 使用渐变背景
+        # 主要功能按钮 - 可点击跳转
+        st.markdown("### 主要功能")
+        st.markdown("""
+        <style>
+        .clickable-card {
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .clickable-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15) !important;
+        }
+        .non-clickable-card {
+            cursor: default;
+            opacity: 0.7;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+        
         col1, col2, col3 = st.columns(3)
         
-        gradients = [
-            "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
-            "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
-            "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)"
-        ]
+        # 数据探索按钮
+        with col1:
+            st.markdown("""
+            <div class="clickable-card" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%); 
+                        padding: 2.5rem 2rem; border-radius: 16px; border: 2px solid #667eea; 
+                        box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2); text-align: center;">
+                <h3 style="color: #667eea; margin: 0 0 1rem 0; font-weight: 700; font-size: 1.5rem;">数据探索</h3>
+                <p style="margin: 0; color: #4a5568; line-height: 1.6; font-size: 0.95rem;">查看数据的基本信息、统计特征和分布情况</p>
+                <div style="margin-top: 1.5rem; color: #667eea; font-weight: 600; font-size: 0.9rem;">点击进入 →</div>
+            </div>
+            """, unsafe_allow_html=True)
+            if st.button("进入数据探索", key="btn_data_explore", use_container_width=True, type="primary"):
+                st.session_state.current_page = "数据探索"
+                st.rerun()
         
-        stats = [
-            ("训练样本数", data_dict['n_train']),
-            ("测试样本数", data_dict['n_test']),
-            ("特征维度", data_dict['n_features'])
-        ]
+        # 模型评估按钮
+        with col2:
+            st.markdown("""
+            <div class="clickable-card" style="background: linear-gradient(135deg, rgba(79, 172, 254, 0.15) 0%, rgba(0, 242, 254, 0.15) 100%); 
+                        padding: 2.5rem 2rem; border-radius: 16px; border: 2px solid #4facfe; 
+                        box-shadow: 0 8px 24px rgba(79, 172, 254, 0.2); text-align: center;">
+                <h3 style="color: #4facfe; margin: 0 0 1rem 0; font-weight: 700; font-size: 1.5rem;">模型评估</h3>
+                <p style="margin: 0; color: #4a5568; line-height: 1.6; font-size: 0.95rem;">查看模型性能指标和可视化分析结果</p>
+                <div style="margin-top: 1.5rem; color: #4facfe; font-weight: 600; font-size: 0.9rem;">点击进入 →</div>
+            </div>
+            """, unsafe_allow_html=True)
+            if st.button("进入模型评估", key="btn_model_eval", use_container_width=True, type="primary"):
+                st.session_state.current_page = "模型评估"
+                st.rerun()
         
-        for idx, (col, (label, value)) in enumerate(zip([col1, col2, col3], stats)):
-            with col:
-                st.markdown(f"""
-                <div class="stat-card" style="background: {gradients[idx]};">
-                    <p>{label}</p>
-                    <h3>{value:,}</h3>
-                </div>
-                """, unsafe_allow_html=True)
+        # 模型预测按钮
+        with col3:
+            st.markdown("""
+            <div class="clickable-card" style="background: linear-gradient(135deg, rgba(245, 87, 108, 0.15) 0%, rgba(240, 147, 251, 0.15) 100%); 
+                        padding: 2.5rem 2rem; border-radius: 16px; border: 2px solid #f5576c; 
+                        box-shadow: 0 8px 24px rgba(245, 87, 108, 0.2); text-align: center;">
+                <h3 style="color: #f5576c; margin: 0 0 1rem 0; font-weight: 700; font-size: 1.5rem;">模型预测</h3>
+                <p style="margin: 0; color: #4a5568; line-height: 1.6; font-size: 0.95rem;">使用训练好的模型进行实时预测</p>
+                <div style="margin-top: 1.5rem; color: #f5576c; font-weight: 600; font-size: 0.9rem;">点击进入 →</div>
+            </div>
+            """, unsafe_allow_html=True)
+            if st.button("进入模型预测", key="btn_model_predict", use_container_width=True, type="primary"):
+                st.session_state.current_page = "模型预测"
+                st.rerun()
         
         st.markdown("<br><br>", unsafe_allow_html=True)
         
-        # 系统介绍卡片 - 面向用户的设计
+        # 系统功能说明 - 不可点击的信息卡片
         st.markdown("### 系统功能")
         st.markdown("""
         <div class="info-card">
@@ -901,23 +950,23 @@ def main():
                 专业的机器学习模型可视化与分析平台
             </h4>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
-                <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); border-radius: 12px; border-left: 4px solid #667eea; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+                <div class="non-clickable-card" style="padding: 1.5rem; background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); border-radius: 12px; border-left: 4px solid #667eea; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
                     <h5 style="color: #667eea; margin: 0 0 0.75rem 0; font-weight: 700; font-size: 1.1rem;">多模型支持</h5>
                     <p style="margin: 0; color: #4a5568; line-height: 1.6;">支持 XGBoost、LSTM、Transformer 三种先进的机器学习模型，可灵活切换查看不同模型的性能表现</p>
                 </div>
-                <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(118, 75, 162, 0.1) 0%, rgba(240, 147, 251, 0.1) 100%); border-radius: 12px; border-left: 4px solid #764ba2; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+                <div class="non-clickable-card" style="padding: 1.5rem; background: linear-gradient(135deg, rgba(118, 75, 162, 0.1) 0%, rgba(240, 147, 251, 0.1) 100%); border-radius: 12px; border-left: 4px solid #764ba2; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
                     <h5 style="color: #764ba2; margin: 0 0 0.75rem 0; font-weight: 700; font-size: 1.1rem;">性能评估</h5>
                     <p style="margin: 0; color: #4a5568; line-height: 1.6;">提供全面的模型性能指标评估，包括 RMSE、R²、MAE、MBE、MAPE、MSE 等多项指标</p>
                 </div>
-                <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(240, 147, 251, 0.1) 0%, rgba(245, 87, 108, 0.1) 100%); border-radius: 12px; border-left: 4px solid #f093fb; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+                <div class="non-clickable-card" style="padding: 1.5rem; background: linear-gradient(135deg, rgba(240, 147, 251, 0.1) 0%, rgba(245, 87, 108, 0.1) 100%); border-radius: 12px; border-left: 4px solid #f093fb; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
                     <h5 style="color: #f093fb; margin: 0 0 0.75rem 0; font-weight: 700; font-size: 1.1rem;">多维度预测</h5>
                     <p style="margin: 0; color: #4a5568; line-height: 1.6;">支持同时预测5个输出维度，适用于复杂的多目标回归任务</p>
                 </div>
-                <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(79, 172, 254, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%); border-radius: 12px; border-left: 4px solid #4facfe; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+                <div class="non-clickable-card" style="padding: 1.5rem; background: linear-gradient(135deg, rgba(79, 172, 254, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%); border-radius: 12px; border-left: 4px solid #4facfe; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
                     <h5 style="color: #4facfe; margin: 0 0 0.75rem 0; font-weight: 700; font-size: 1.1rem;">交互式可视化</h5>
                     <p style="margin: 0; color: #4a5568; line-height: 1.6;">提供丰富的交互式图表，包括预测对比、散点图分析、误差分布等可视化功能</p>
                 </div>
-                <div style="padding: 1.5rem; background: linear-gradient(135deg, rgba(245, 87, 108, 0.1) 0%, rgba(240, 147, 251, 0.1) 100%); border-radius: 12px; border-left: 4px solid #f5576c; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
+                <div class="non-clickable-card" style="padding: 1.5rem; background: linear-gradient(135deg, rgba(245, 87, 108, 0.1) 0%, rgba(240, 147, 251, 0.1) 100%); border-radius: 12px; border-left: 4px solid #f5576c; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
                     <h5 style="color: #f5576c; margin: 0 0 0.75rem 0; font-weight: 700; font-size: 1.1rem;">实时预测</h5>
                     <p style="margin: 0; color: #4a5568; line-height: 1.6;">支持实时输入特征值进行预测，快速获得模型预测结果</p>
                 </div>
@@ -925,33 +974,13 @@ def main():
         </div>
         """, unsafe_allow_html=True)
         
-        st.markdown("<br>", unsafe_allow_html=True)
-        
-        # 快速开始 - 改进卡片设计
-        st.markdown("### 快速开始")
-        col1, col2 = st.columns(2)
-        
-        features = [
-            ("数据探索", "查看数据的基本信息、统计特征和分布情况", "linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%)", "#667eea"),
-            ("模型评估", "查看模型性能指标和可视化分析结果", "linear-gradient(135deg, rgba(79, 172, 254, 0.1) 0%, rgba(0, 242, 254, 0.1) 100%)", "#4facfe"),
-            ("模型预测", "使用训练好的模型进行实时预测", "linear-gradient(135deg, rgba(245, 87, 108, 0.1) 0%, rgba(240, 147, 251, 0.1) 100%)", "#f5576c")
-        ]
-        
-        cols = st.columns(3)
-        for col, (title, desc, bg, border_color) in zip(cols, features):
-            with col:
-                st.markdown(f"""
-                <div class="info-card" style="background: {bg}; border-left-color: {border_color};">
-                    <h4 style="color: {border_color}; margin-top: 0; font-size: 1.3rem; margin-bottom: 0.75rem; font-weight: 600;">
-                        {title}
-                    </h4>
-                    <p style="margin: 0; color: #4a5568; line-height: 1.6;">{desc}</p>
-                </div>
-                """, unsafe_allow_html=True)
-        
-    
     # =============== 数据探索 ===============
-    elif page == "数据探索":
+    elif st.session_state.current_page == "数据探索":
+        # 返回首页按钮
+        if st.button("← 返回首页", key="back_home_1"):
+            st.session_state.current_page = "首页"
+            st.rerun()
+        
         st.markdown('<p class="medium-font">数据探索</p>', unsafe_allow_html=True)
         st.markdown("---")
         
@@ -1077,11 +1106,18 @@ def main():
     
     
     # =============== 模型评估 ===============
-    elif page == "模型评估":
+    elif st.session_state.current_page == "模型评估":
+        # 返回首页按钮和模型选择
+        col1, col2 = st.columns([1, 3])
+        with col1:
+            if st.button("← 返回首页", key="back_home_2"):
+                st.session_state.current_page = "首页"
+                st.rerun()
+        with col2:
+            model_choice = st.selectbox("选择模型", ["XGBoost", "LSTM", "Transformer"], key="model_select_eval")
+        
         st.markdown('<p class="medium-font">模型评估</p>', unsafe_allow_html=True)
         st.markdown("---")
-        
-        model_choice = st.sidebar.selectbox("选择模型", ["XGBoost", "LSTM", "Transformer"])
         
         # 加载模型
         model = load_model(model_choice)
@@ -1300,11 +1336,18 @@ def main():
             )
     
     # =============== 模型预测 ===============
-    elif page == "模型预测":
+    elif st.session_state.current_page == "模型预测":
+        # 返回首页按钮和模型选择
+        col1, col2 = st.columns([1, 3])
+        with col1:
+            if st.button("← 返回首页", key="back_home_3"):
+                st.session_state.current_page = "首页"
+                st.rerun()
+        with col2:
+            model_choice = st.selectbox("选择模型", ["XGBoost", "LSTM", "Transformer"], key="model_select_predict")
+        
         st.markdown('<p class="medium-font">模型预测</p>', unsafe_allow_html=True)
         st.markdown("---")
-        
-        model_choice = st.sidebar.selectbox("选择模型", ["XGBoost", "LSTM", "Transformer"])
         
         # 加载模型
         model = load_model(model_choice)
