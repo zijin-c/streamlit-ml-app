@@ -785,8 +785,29 @@ def plot_metrics_comparison(metrics_dict):
     
     positions = [(1,1), (1,2), (1,3), (2,1), (2,2)]
     
+    # 指标名称映射（处理可能的键名差异）
+    metric_mapping = {
+        'RMSE': 'RMSE',
+        'R²': 'R2',
+        'MAE': 'MAE',
+        'MAPE': 'MAPE',
+        'MSE': 'MSE'
+    }
+    
     for idx, metric in enumerate(metric_names):
-        values = [metrics_dict[f'output_{i+1}'][metric] for i in range(5)]
+        # 获取正确的指标键名
+        metric_key = metric_mapping.get(metric, metric)
+        
+        # 安全地获取值，处理可能的键不存在情况
+        values = []
+        for i in range(5):
+            output_key = f'output_{i+1}'
+            if output_key in metrics_dict and metric_key in metrics_dict[output_key]:
+                values.append(metrics_dict[output_key][metric_key])
+            else:
+                # 如果键不存在，使用0作为默认值
+                values.append(0.0)
+        
         row, col = positions[idx]
         
         # 为每个输出维度使用不同颜色
@@ -871,8 +892,8 @@ def main():
             <p style="font-size: 1.2rem; color: #718096; margin-bottom: 1rem;">
                 专业的机器学习模型可视化与分析平台
             </p>
-        </div>
-        """, unsafe_allow_html=True)
+            </div>
+            """, unsafe_allow_html=True)
         
         # 主要功能按钮 - 可点击跳转
         st.markdown("### 主要功能")
@@ -924,7 +945,7 @@ def main():
             if st.button("进入模型评估", key="btn_model_eval", use_container_width=True, type="primary"):
                 st.session_state.current_page = "模型评估"
                 st.rerun()
-        
+            
         # 模型预测按钮
         with col3:
             st.markdown("""
@@ -973,7 +994,7 @@ def main():
             </div>
         </div>
         """, unsafe_allow_html=True)
-        
+    
     # =============== 数据探索 ===============
     elif st.session_state.current_page == "数据探索":
         # 返回首页按钮
@@ -1107,17 +1128,75 @@ def main():
     
     # =============== 模型评估 ===============
     elif st.session_state.current_page == "模型评估":
-        # 返回首页按钮和模型选择
-        col1, col2 = st.columns([1, 3])
-        with col1:
-            if st.button("← 返回首页", key="back_home_2"):
-                st.session_state.current_page = "首页"
-                st.rerun()
-        with col2:
-            model_choice = st.selectbox("选择模型", ["XGBoost", "LSTM", "Transformer"], key="model_select_eval")
+        # 返回首页按钮
+        if st.button("← 返回首页", key="back_home_2"):
+            st.session_state.current_page = "首页"
+            st.rerun()
         
         st.markdown('<p class="medium-font">模型评估</p>', unsafe_allow_html=True)
         st.markdown("---")
+        
+        # 模型选择 - 大而美观的按钮组
+        st.markdown("### 选择模型")
+        st.markdown("""
+        <style>
+        .model-select-card {
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            border: 3px solid;
+            margin-bottom: 1rem;
+        }
+        .model-select-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+        }
+        .model-select-card.selected {
+            border-width: 4px;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+        }
+        </style>
+        """, unsafe_allow_html=True)
+        
+        model_options = ["XGBoost", "LSTM", "Transformer"]
+        model_colors = {
+            "XGBoost": "#667eea",
+            "LSTM": "#f093fb",
+            "Transformer": "#4facfe"
+        }
+        
+        # 初始化模型选择
+        if 'selected_model_eval' not in st.session_state:
+            st.session_state.selected_model_eval = "XGBoost"
+        
+        model_cols = st.columns(3)
+        for idx, (col, model_name) in enumerate(zip(model_cols, model_options)):
+            with col:
+                color = model_colors[model_name]
+                is_selected = st.session_state.selected_model_eval == model_name
+                border_style = f"4px solid {color}" if is_selected else f"3px solid {color}80"
+                bg_style = f"linear-gradient(135deg, {color}20 0%, {color}10 100%)" if is_selected else f"linear-gradient(135deg, {color}15 0%, {color}05 100%)"
+                
+                st.markdown(f"""
+                <div class="model-select-card {'selected' if is_selected else ''}" 
+                            style="background: {bg_style}; border: {border_style};">
+                    <h3 style="color: {color}; margin: 0 0 0.5rem 0; font-weight: 700; font-size: 1.8rem;">
+                        {model_name}
+                    </h3>
+                    <p style="margin: 0; color: #4a5568; font-size: 0.95rem;">
+                        {'当前选择' if is_selected else '点击选择'}
+                    </p>
+                </div>
+                """, unsafe_allow_html=True)
+                
+                if st.button(f"选择{model_name}", key=f"select_{model_name}_eval", use_container_width=True):
+                    st.session_state.selected_model_eval = model_name
+                    st.rerun()
+        
+        model_choice = st.session_state.selected_model_eval
         
         # 加载模型
         model = load_model(model_choice)
@@ -1337,17 +1416,75 @@ def main():
     
     # =============== 模型预测 ===============
     elif st.session_state.current_page == "模型预测":
-        # 返回首页按钮和模型选择
-        col1, col2 = st.columns([1, 3])
-        with col1:
-            if st.button("← 返回首页", key="back_home_3"):
-                st.session_state.current_page = "首页"
-                st.rerun()
-        with col2:
-            model_choice = st.selectbox("选择模型", ["XGBoost", "LSTM", "Transformer"], key="model_select_predict")
+        # 返回首页按钮
+        if st.button("← 返回首页", key="back_home_3"):
+            st.session_state.current_page = "首页"
+            st.rerun()
         
         st.markdown('<p class="medium-font">模型预测</p>', unsafe_allow_html=True)
         st.markdown("---")
+        
+        # 模型选择 - 大而美观的按钮组
+        st.markdown("### 选择模型")
+        st.markdown("""
+        <style>
+        .model-select-card {
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 16px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            border: 3px solid;
+            margin-bottom: 1rem;
+        }
+        .model-select-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 12px 32px rgba(0,0,0,0.15);
+        }
+        .model-select-card.selected {
+            border-width: 4px;
+            box-shadow: 0 12px 32px rgba(0,0,0,0.2);
+        }
+        </style>
+        """, unsafe_allow_html=True)
+        
+        model_options = ["XGBoost", "LSTM", "Transformer"]
+        model_colors = {
+            "XGBoost": "#667eea",
+            "LSTM": "#f093fb",
+            "Transformer": "#4facfe"
+        }
+        
+        # 初始化模型选择
+        if 'selected_model_predict' not in st.session_state:
+            st.session_state.selected_model_predict = "XGBoost"
+        
+        model_cols = st.columns(3)
+        for idx, (col, model_name) in enumerate(zip(model_cols, model_options)):
+            with col:
+                color = model_colors[model_name]
+                is_selected = st.session_state.selected_model_predict == model_name
+                border_style = f"4px solid {color}" if is_selected else f"3px solid {color}80"
+                bg_style = f"linear-gradient(135deg, {color}20 0%, {color}10 100%)" if is_selected else f"linear-gradient(135deg, {color}15 0%, {color}05 100%)"
+                
+                st.markdown(f"""
+                <div class="model-select-card {'selected' if is_selected else ''}" 
+                            style="background: {bg_style}; border: {border_style};">
+                    <h3 style="color: {color}; margin: 0 0 0.5rem 0; font-weight: 700; font-size: 1.8rem;">
+                        {model_name}
+                    </h3>
+                    <p style="margin: 0; color: #4a5568; font-size: 0.95rem;">
+                        {'当前选择' if is_selected else '点击选择'}
+                    </p>
+                </div>
+                """, unsafe_allow_html=True)
+                
+                if st.button(f"选择{model_name}", key=f"select_{model_name}_predict", use_container_width=True):
+                    st.session_state.selected_model_predict = model_name
+                    st.rerun()
+        
+        model_choice = st.session_state.selected_model_predict
         
         # 加载模型
         model = load_model(model_choice)
@@ -1503,6 +1640,7 @@ def main():
             
             # 使用卡片展示对比结果
             comparison_cols = st.columns(5)
+            colors = ['#667eea', '#764ba2', '#f093fb', '#f5576c', '#4facfe']
             
             for idx, (col, color) in enumerate(zip(comparison_cols, colors)):
                 with col:
