@@ -902,6 +902,7 @@ def main():
         .clickable-card {
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
         }
         .clickable-card:hover {
             transform: translateY(-8px) scale(1.02);
@@ -911,53 +912,76 @@ def main():
             cursor: default;
             opacity: 0.7;
         }
+        .card-container {
+            position: relative;
+        }
+        .card-container button[kind="primary"] {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            z-index: 10;
+            cursor: pointer;
+            border: none;
+            background: transparent;
+            padding: 0;
+            margin: 0;
+        }
         </style>
         """, unsafe_allow_html=True)
         
         col1, col2, col3 = st.columns(3)
         
-        # 数据探索按钮
+        # 数据探索卡片 - 整个卡片可点击
         with col1:
             st.markdown("""
-            <div class="clickable-card" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%); 
-                        padding: 2.5rem 2rem; border-radius: 16px; border: 2px solid #667eea; 
-                        box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2); text-align: center;">
-                <h3 style="color: #667eea; margin: 0 0 1rem 0; font-weight: 700; font-size: 1.5rem;">数据探索</h3>
-                <p style="margin: 0; color: #4a5568; line-height: 1.6; font-size: 0.95rem;">查看数据的基本信息、统计特征和分布情况</p>
-                <div style="margin-top: 1.5rem; color: #667eea; font-weight: 600; font-size: 0.9rem;">点击进入 →</div>
+            <div class="card-container" style="position: relative;">
+                <div class="clickable-card" style="background: linear-gradient(135deg, rgba(102, 126, 234, 0.15) 0%, rgba(118, 75, 162, 0.15) 100%); 
+                            padding: 3rem 2.5rem; border-radius: 16px; border: 2px solid #667eea; 
+                            box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2); text-align: center; min-height: 280px;">
+                    <h3 style="color: #667eea; margin: 0 0 1.5rem 0; font-weight: 700; font-size: 1.8rem;">数据探索</h3>
+                    <p style="margin: 0; color: #4a5568; line-height: 1.8; font-size: 1rem;">查看数据的基本信息、统计特征和分布情况</p>
+                    <div style="margin-top: 2rem; color: #667eea; font-weight: 600; font-size: 1rem;">点击卡片进入 →</div>
+                </div>
             </div>
             """, unsafe_allow_html=True)
-            if st.button("进入数据探索", key="btn_data_explore", use_container_width=True, type="primary"):
+            if st.button("", key="btn_data_explore", use_container_width=True, type="primary"):
                 st.session_state.current_page = "数据探索"
                 st.rerun()
         
-        # 模型评估按钮
+        # 模型评估卡片 - 整个卡片可点击
         with col2:
             st.markdown("""
-            <div class="clickable-card" style="background: linear-gradient(135deg, rgba(79, 172, 254, 0.15) 0%, rgba(0, 242, 254, 0.15) 100%); 
-                        padding: 2.5rem 2rem; border-radius: 16px; border: 2px solid #4facfe; 
-                        box-shadow: 0 8px 24px rgba(79, 172, 254, 0.2); text-align: center;">
-                <h3 style="color: #4facfe; margin: 0 0 1rem 0; font-weight: 700; font-size: 1.5rem;">模型评估</h3>
-                <p style="margin: 0; color: #4a5568; line-height: 1.6; font-size: 0.95rem;">查看模型性能指标和可视化分析结果</p>
-                <div style="margin-top: 1.5rem; color: #4facfe; font-weight: 600; font-size: 0.9rem;">点击进入 →</div>
+            <div class="card-container" style="position: relative;">
+                <div class="clickable-card" style="background: linear-gradient(135deg, rgba(79, 172, 254, 0.15) 0%, rgba(0, 242, 254, 0.15) 100%); 
+                            padding: 3rem 2.5rem; border-radius: 16px; border: 2px solid #4facfe; 
+                            box-shadow: 0 8px 24px rgba(79, 172, 254, 0.2); text-align: center; min-height: 280px;">
+                    <h3 style="color: #4facfe; margin: 0 0 1.5rem 0; font-weight: 700; font-size: 1.8rem;">模型评估</h3>
+                    <p style="margin: 0; color: #4a5568; line-height: 1.8; font-size: 1rem;">查看模型性能指标和可视化分析结果</p>
+                    <div style="margin-top: 2rem; color: #4facfe; font-weight: 600; font-size: 1rem;">点击卡片进入 →</div>
+                </div>
             </div>
             """, unsafe_allow_html=True)
-            if st.button("进入模型评估", key="btn_model_eval", use_container_width=True, type="primary"):
+            if st.button("", key="btn_model_eval", use_container_width=True, type="primary"):
                 st.session_state.current_page = "模型评估"
                 st.rerun()
-            
-        # 模型预测按钮
+        
+        # 模型预测卡片 - 整个卡片可点击
         with col3:
             st.markdown("""
-            <div class="clickable-card" style="background: linear-gradient(135deg, rgba(245, 87, 108, 0.15) 0%, rgba(240, 147, 251, 0.15) 100%); 
-                        padding: 2.5rem 2rem; border-radius: 16px; border: 2px solid #f5576c; 
-                        box-shadow: 0 8px 24px rgba(245, 87, 108, 0.2); text-align: center;">
-                <h3 style="color: #f5576c; margin: 0 0 1rem 0; font-weight: 700; font-size: 1.5rem;">模型预测</h3>
-                <p style="margin: 0; color: #4a5568; line-height: 1.6; font-size: 0.95rem;">使用训练好的模型进行实时预测</p>
-                <div style="margin-top: 1.5rem; color: #f5576c; font-weight: 600; font-size: 0.9rem;">点击进入 →</div>
+            <div class="card-container" style="position: relative;">
+                <div class="clickable-card" style="background: linear-gradient(135deg, rgba(245, 87, 108, 0.15) 0%, rgba(240, 147, 251, 0.15) 100%); 
+                            padding: 3rem 2.5rem; border-radius: 16px; border: 2px solid #f5576c; 
+                            box-shadow: 0 8px 24px rgba(245, 87, 108, 0.2); text-align: center; min-height: 280px;">
+                    <h3 style="color: #f5576c; margin: 0 0 1.5rem 0; font-weight: 700; font-size: 1.8rem;">模型预测</h3>
+                    <p style="margin: 0; color: #4a5568; line-height: 1.8; font-size: 1rem;">使用训练好的模型进行实时预测</p>
+                    <div style="margin-top: 2rem; color: #f5576c; font-weight: 600; font-size: 1rem;">点击卡片进入 →</div>
+                </div>
             </div>
             """, unsafe_allow_html=True)
-            if st.button("进入模型预测", key="btn_model_predict", use_container_width=True, type="primary"):
+            if st.button("", key="btn_model_predict", use_container_width=True, type="primary"):
                 st.session_state.current_page = "模型预测"
                 st.rerun()
         
@@ -1136,7 +1160,7 @@ def main():
         st.markdown('<p class="medium-font">模型评估</p>', unsafe_allow_html=True)
         st.markdown("---")
         
-        # 模型选择 - 大而美观的按钮组
+        # 模型选择 - 大而美观的按钮组，整个卡片可点击
         st.markdown("### 选择模型")
         st.markdown("""
         <style>
@@ -1144,7 +1168,7 @@ def main():
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border-radius: 16px;
-            padding: 2rem;
+            padding: 2.5rem 2rem;
             text-align: center;
             box-shadow: 0 8px 24px rgba(0,0,0,0.1);
             border: 3px solid;
@@ -1181,18 +1205,21 @@ def main():
                 bg_style = f"linear-gradient(135deg, {color}20 0%, {color}10 100%)" if is_selected else f"linear-gradient(135deg, {color}15 0%, {color}05 100%)"
                 
                 st.markdown(f"""
-                <div class="model-select-card {'selected' if is_selected else ''}" 
-                            style="background: {bg_style}; border: {border_style};">
-                    <h3 style="color: {color}; margin: 0 0 0.5rem 0; font-weight: 700; font-size: 1.8rem;">
-                        {model_name}
-                    </h3>
-                    <p style="margin: 0; color: #4a5568; font-size: 0.95rem;">
-                        {'当前选择' if is_selected else '点击选择'}
-                    </p>
+                <div class="card-container" style="position: relative;">
+                    <div class="model-select-card {'selected' if is_selected else ''}" 
+                                style="background: {bg_style}; border: {border_style}; min-height: 180px;">
+                        <h3 style="color: {color}; margin: 0 0 0.75rem 0; font-weight: 700; font-size: 2rem;">
+                            {model_name}
+                        </h3>
+                        <p style="margin: 0; color: #4a5568; font-size: 1rem; font-weight: 500;">
+                            {'当前选择' if is_selected else '点击选择'}
+                        </p>
+                    </div>
                 </div>
                 """, unsafe_allow_html=True)
                 
-                if st.button(f"选择{model_name}", key=f"select_{model_name}_eval", use_container_width=True):
+                # 透明按钮覆盖整个卡片
+                if st.button("", key=f"btn_{model_name}_eval", use_container_width=True, type="primary"):
                     st.session_state.selected_model_eval = model_name
                     st.rerun()
         
@@ -1336,6 +1363,22 @@ def main():
         st.markdown("<br>", unsafe_allow_html=True)
         st.markdown("### 详细分析")
         
+        st.markdown("""
+        <style>
+        .stSelectbox > div > div {
+            font-size: 1.2rem !important;
+            padding: 1rem 1.5rem !important;
+            min-height: 60px !important;
+        }
+        .stSelectbox label {
+            font-size: 1.1rem !important;
+            font-weight: 600 !important;
+            color: #1a202c !important;
+            margin-bottom: 0.75rem !important;
+        }
+        </style>
+        """, unsafe_allow_html=True)
+        
         output_idx = st.selectbox("选择输出维度", range(5), format_func=lambda x: f"输出 {x+1}", key="output_dim")
         
         tab1, tab2, tab3 = st.tabs(["预测对比", "散点图分析", "误差分布"])
@@ -1424,7 +1467,7 @@ def main():
         st.markdown('<p class="medium-font">模型预测</p>', unsafe_allow_html=True)
         st.markdown("---")
         
-        # 模型选择 - 大而美观的按钮组
+        # 模型选择 - 大而美观的按钮组，整个卡片可点击
         st.markdown("### 选择模型")
         st.markdown("""
         <style>
@@ -1432,7 +1475,7 @@ def main():
             cursor: pointer;
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             border-radius: 16px;
-            padding: 2rem;
+            padding: 2.5rem 2rem;
             text-align: center;
             box-shadow: 0 8px 24px rgba(0,0,0,0.1);
             border: 3px solid;
@@ -1469,18 +1512,21 @@ def main():
                 bg_style = f"linear-gradient(135deg, {color}20 0%, {color}10 100%)" if is_selected else f"linear-gradient(135deg, {color}15 0%, {color}05 100%)"
                 
                 st.markdown(f"""
-                <div class="model-select-card {'selected' if is_selected else ''}" 
-                            style="background: {bg_style}; border: {border_style};">
-                    <h3 style="color: {color}; margin: 0 0 0.5rem 0; font-weight: 700; font-size: 1.8rem;">
-                        {model_name}
-                    </h3>
-                    <p style="margin: 0; color: #4a5568; font-size: 0.95rem;">
-                        {'当前选择' if is_selected else '点击选择'}
-                    </p>
+                <div class="card-container" style="position: relative;">
+                    <div class="model-select-card {'selected' if is_selected else ''}" 
+                                style="background: {bg_style}; border: {border_style}; min-height: 180px;">
+                        <h3 style="color: {color}; margin: 0 0 0.75rem 0; font-weight: 700; font-size: 2rem;">
+                            {model_name}
+                        </h3>
+                        <p style="margin: 0; color: #4a5568; font-size: 1rem; font-weight: 500;">
+                            {'当前选择' if is_selected else '点击选择'}
+                        </p>
+                    </div>
                 </div>
                 """, unsafe_allow_html=True)
                 
-                if st.button(f"选择{model_name}", key=f"select_{model_name}_predict", use_container_width=True):
+                # 透明按钮覆盖整个卡片
+                if st.button("", key=f"btn_{model_name}_predict", use_container_width=True, type="primary"):
                     st.session_state.selected_model_predict = model_name
                     st.rerun()
         
