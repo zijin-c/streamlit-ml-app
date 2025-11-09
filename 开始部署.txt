@@ -1,0 +1,179 @@
+========================================
+Streamlit Cloud 部署 - 开始部署
+========================================
+
+欢迎使用 Streamlit Cloud 部署包！
+
+========================================
+📋 部署前检查
+========================================
+
+请确认以下内容：
+
+1. ✅ 所有文件已准备完成
+2. ⚠️  数据文件（去噪后数据.xlsx）需要手动添加
+3. ✅ 模型文件已包含
+4. ✅ 配置文件已创建
+
+========================================
+⚠️  重要：添加数据文件
+========================================
+
+数据文件需要手动添加到部署文件夹：
+
+方法1：使用文件管理器
+1. 打开文件管理器
+2. 找到项目根目录的 "去噪后数据.xlsx" 文件
+3. 复制到 "streamlit_cloud_deploy" 文件夹
+
+方法2：使用命令行
+Windows PowerShell:
+  copy "d:\Python Program\bisai\去噪后数据.xlsx" "d:\Python Program\bisai\streamlit_cloud_deploy\"
+
+========================================
+🚀 快速部署步骤
+========================================
+
+第一步：创建 GitHub 仓库
+----------------------------------------
+1. 访问 https://github.com
+2. 登录您的账号
+3. 点击右上角 "+" -> "New repository"
+4. 填写仓库信息：
+   - Repository name: streamlit-ml-app (可自定义)
+   - Description: 机器学习模型可视化系统
+   - Visibility: 选择 Public (必须公开)
+   - 不要勾选 "Add a README file"
+5. 点击 "Create repository"
+6. 复制仓库地址（例如：https://github.com/用户名/streamlit-ml-app.git）
+
+第二步：上传代码到 GitHub
+----------------------------------------
+方法一：使用 Git 命令行（推荐）
+
+1. 打开 PowerShell 或 CMD
+2. 进入部署文件夹：
+   cd "d:\Python Program\bisai\streamlit_cloud_deploy"
+
+3. 初始化 Git 仓库：
+   git init
+
+4. 添加所有文件：
+   git add .
+
+5. 提交文件：
+   git commit -m "Initial commit: Streamlit ML App"
+
+6. 连接远程仓库：
+   git remote add origin https://github.com/你的用户名/streamlit-ml-app.git
+   （将"你的用户名"替换为您的GitHub用户名）
+
+7. 推送代码：
+   git branch -M main
+   git push -u origin main
+
+8. 输入 GitHub 用户名和 Personal Access Token
+   （如果提示输入密码，需要使用 Personal Access Token）
+
+方法二：使用 GitHub Desktop（更简单）
+
+1. 下载 GitHub Desktop: https://desktop.github.com
+2. 安装并登录 GitHub
+3. 点击 "File" -> "Add local repository"
+4. 选择 "streamlit_cloud_deploy" 文件夹
+5. 点击 "Publish repository"
+6. 输入仓库名称，取消勾选 "Keep this code private"
+7. 点击 "Publish repository"
+
+第三步：部署到 Streamlit Cloud
+----------------------------------------
+1. 访问 https://streamlit.io/cloud
+2. 点击 "Sign up" 或 "Get started"
+3. 点击 "Continue with GitHub"
+4. 授权 Streamlit Cloud 访问您的 GitHub 账号
+5. 点击 "New app"
+6. 填写应用信息：
+   - Repository: 选择您刚创建的仓库
+   - Branch: 选择 main (或 master)
+   - Main file path: 输入 app.py
+   - App URL: 可以自定义（可选）
+7. 点击 "Deploy!"
+8. 等待部署完成（2-5分钟）
+9. 访问应用 URL（例如：https://your-app-name.streamlit.app）
+
+========================================
+📚 详细文档
+========================================
+
+如需更详细的说明，请查看：
+
+1. README.md - 完整的项目说明和部署指南
+2. 部署教程.md - 详细的逐步部署教程
+3. 快速开始.txt - 快速部署指南
+4. 文件清单.txt - 文件清单和检查清单
+
+========================================
+✅ 部署检查清单
+========================================
+
+部署前请确认：
+
+[ ] GitHub 账号已注册
+[ ] Git 已安装（如果使用命令行）
+[ ] 所有文件已准备好
+[ ] 数据文件（去噪后数据.xlsx）已添加
+[ ] requirements.txt 文件完整
+[ ] .streamlit/config.toml 文件存在
+[ ] 模型文件已包含
+[ ] 代码已推送到 GitHub
+[ ] Streamlit Cloud 账号已注册
+[ ] 应用已部署
+[ ] 应用可以正常访问
+
+========================================
+🆘 常见问题
+========================================
+
+Q: 部署失败，提示 "ModuleNotFoundError"
+A: 检查 requirements.txt 文件是否包含所有依赖
+
+Q: 模型文件找不到
+A: 确保 models/ 文件夹中包含所有模型文件
+
+Q: 数据文件加载失败
+A: 确保 去噪后数据.xlsx 文件已添加到部署文件夹
+
+Q: 如何更新应用？
+A: 修改代码后，提交并推送到 GitHub，Streamlit Cloud 会自动更新
+
+Q: 如何查看日志？
+A: 在 Streamlit Cloud 控制台中查看 "Logs" 标签页
+
+========================================
+🎯 下一步
+========================================
+
+1. 添加数据文件（如果还没有）
+2. 按照上述步骤部署应用
+3. 访问应用 URL 测试功能
+4. 分享应用给其他人
+
+========================================
+📞 获取帮助
+========================================
+
+如果遇到问题：
+
+1. 查看详细文档（README.md、部署教程.md）
+2. 查看 Streamlit Cloud 文档：https://docs.streamlit.io/streamlit-community-cloud
+3. 查看 Streamlit 文档：https://docs.streamlit.io
+4. 在 GitHub 上提交问题
+
+========================================
+🎉 祝部署顺利！
+========================================
+
+如有任何问题，请随时查看文档或联系支持。
+
+========================================
+

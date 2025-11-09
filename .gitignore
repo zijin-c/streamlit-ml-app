@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Model files (if too large, consider Git LFS)
+# *.pkl
+
+# Results
+results/
+*.xlsx
+*.csv
+
+# Logs
+*.log
+
+# Streamlit
+.streamlit/secrets.toml
+
